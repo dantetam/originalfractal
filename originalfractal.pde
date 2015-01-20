@@ -6,13 +6,23 @@ public double[][] terrain;
 public void setup()
 {
   size(800,800);
-  rb = new RecursiveBlock(8700);
+  rb = new RecursiveBlock(870000);
   terrain = rb.generate(new double[64]);
 }
 
 public void draw()
 {
-
+  background(255);
+  float w = width/float(terrain.length);
+  float h = height/float(terrain[0].length);
+  for (int r = 0; r < terrain.length; r++)
+  {
+    for (int c = 0; c < terrain[0].length; c++)
+    {
+      fill((float)terrain[r][c]*50);
+      rect(r*w, c*h, w, h);
+    }
+  }
 }
 
 public class RecursiveBlock {
@@ -312,7 +322,7 @@ public class RecursiveBlock {
     terrain = heightMap((int)args[0]);
     terrain = expandData(terrain, terrain.length*expandRatio);
     //println(n + " blocks");
-    printTable(terrain);
+    //printTable(terrain);
     zeroMap = new boolean[terrain.length][terrain[0].length];
     for (int r = 0; r < terrain.length; r++)
     {
